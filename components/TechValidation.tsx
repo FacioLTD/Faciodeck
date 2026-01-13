@@ -1,13 +1,11 @@
 import { ShieldCheck, CheckCircle2 } from "lucide-react";
 
 const logos = [
-    { name: "Berkshire Hathaway", src: "/images/logos/berkshire.png" },
     { name: "Generali", src: "/images/logos/generali.svg" },
     { name: "Mapfre", src: "/images/logos/mapfre.png" },
     { name: "Aflac", src: "/images/logos/aflac.png" },
     { name: "Harel", src: "/images/logos/harel.png" },
-    { name: "Howden", src: "/images/logos/howden.png" },
-    { name: "AmTrust", src: "/images/logos/amtrust.png" }
+    { name: "Howden", src: "/images/logos/howden.png" }
 ];
 
 export function TechValidation() {
@@ -34,9 +32,9 @@ export function TechValidation() {
                         <p className="text-center text-sm font-semibold text-slate-500 uppercase tracking-widest mb-6">
                             Pilots & Technical Validation with
                         </p>
-                        <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 opacity-80">
+                        <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6">
                             {logos.map((logo, index) => (
-                                <div key={index} className="relative h-12 w-32 grayscale hover:grayscale-0 transition-all duration-300">
+                                <div key={index} className="relative h-12 w-32 hover:scale-110 transition-transform duration-300">
                                     <img
                                         src={logo.src}
                                         alt={logo.name}
