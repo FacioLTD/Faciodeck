@@ -33,8 +33,8 @@ const CustomShaderMaterial = {
       // We assume mouse affects xy plane primarily, z is just depth
       float dist = distance(pos.xy, uMousePosition);
       
-      // Attraction range
-      float range = 8.0; 
+      // Attraction range - INCREASED for visibility
+      float range = 25.0; 
       
       if (dist < range) {
         float strength = (range - dist) / range; // 0 to 1 (1 at center)
@@ -44,13 +44,13 @@ const CustomShaderMaterial = {
         vec2 dir = normalize(uMousePosition - pos.xy);
         
         // Move towards mouse
-        float attractionPower = 3.0 * strength;
+        float attractionPower = 5.0 * strength; // Stronger pull
         pos.xy += dir * attractionPower;
         
         // Add a "Swirl" - perpendicular vector
         // Rotated 90 degrees: (x, y) -> (-y, x)
         vec2 swirlDir = vec2(-dir.y, dir.x);
-        float swirlPower = 2.0 * strength;
+        float swirlPower = 3.0 * strength; // Stronger swirl
         
         // Apply swirl based on which "side" or just global swirl
         // Let's vary swirl direction by particle random to create chaos or uniform for vortex
@@ -59,7 +59,7 @@ const CustomShaderMaterial = {
         
         // Pull Z slightly towards camera or push away?
         // Let's pull slightly towards camera to make them "pop"
-        pos.z += strength * 2.0;
+        pos.z += strength * 3.0;
       }
 
       vec4 modelViewPosition = modelViewMatrix * vec4(pos, 1.0);
