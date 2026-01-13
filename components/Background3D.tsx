@@ -18,45 +18,48 @@ const CustomShaderMaterial = {
     varying float vColorType;
     varying vec3 vPos;
 
+    // Simple pseudo-random noise
+    float random(vec2 st) {
+        return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+    }
+
     void main() {
       vColorType = colorType;
 
-      // 1. Calculate Sound position dynamically if needed, or use attribute
-      // The prompt suggests calculating wave movement in shader for "Sound" state
+      // 1. Calculate Sound position (Wave)
       vec3 currentSoundPos = positionSound;
-      
-      // Animate the sound wave state (sine wave moving over time)
-      // We add movement to Y or Z based on X/Time
-      currentSoundPos.y += sin(uTime * 2.0 + positionSound.x * 0.5) * 0.5;
-      currentSoundPos.z += cos(uTime * 1.5 + positionSound.x * 0.5) * 0.5;
+      // Complex wave motion
+      float wave = sin(uTime * 1.5 + positionSound.x * 0.4) * 1.5;
+      wave += cos(uTime * 2.2 + positionSound.x * 0.8) * 0.5;
+      currentSoundPos.y += wave;
+      currentSoundPos.z += sin(uTime * 0.5 + positionSound.y) * 0.5;
 
-      // 2. DNA Position is static relative to itself, but we might want the whole helix to rotate slowly?
-      // For now, keep it static or apply rotation in JS to the group.
-      
-      // Calculate distance to mouse (mapped to -1..1 or screen coords)
-      // We need to map world coordinates to screen space or pass mouse in world space.
-      // Easiest is to do logic in world space if we can map mouse ray, 
-      // but "2D mouse" uniform (screen pixels) vs 3D world pos is tricky.
-      // Let's assume standard camera view and map mouse to a plane approx z=0.
-      
-      // Simplified: Interaction based on world distance projected? 
-      // Or just pass mouse as mapped -1 to 1 and compare to view position?
-      
-      // Let's stick to the prompt pseudo-code logic which used just distance(uMousePosition, positionDNA.xy)
-      // This implies 2D projection or simplified logic. We'll try to map world XY to mouse.
-      
-      float dist = distance(uMousePosition, positionDNA.xy); // Assuming View is looking at XY plane
-      
-      // Radius of influence
-      float influence = smoothstep(4.0, 0.0, dist); // 4.0 world units radius
+      // 2. DNA Position (Breathing/Living)
+      vec3 currentDNAPos = positionDNA;
+      // Gentle floating drift based on position and time
+      float drift = sin(uTime * 0.5 + positionDNA.y * 0.5) * 0.1;
+      currentDNAPos.x += drift;
+      currentDNAPos.z += cos(uTime * 0.3 + positionDNA.x) * 0.1;
 
-      // 3. Mix
-      vec3 finalPos = mix(positionDNA, currentSoundPos, influence);
+      // 3. Interaction
+      // Map mouse from screen space (-height/2 to height/2 approx) to world
+      // Assuming camera z=15, simple distance check.
+      float dist = distance(uMousePosition, currentDNAPos.xy); 
+      
+      // Radius of influence - make it responsive
+      float influence = smoothstep(5.0, 0.0, dist); 
 
-      // 4. Repel
-      if (dist < 2.0) {
+      // 4. Mix
+      vec3 finalPos = mix(currentDNAPos, currentSoundPos, influence);
+
+      // 5. Repel/Disperse (Quantum Scatter)
+      if (dist < 3.0) {
         vec2 repelDir = normalize(finalPos.xy - uMousePosition);
-        finalPos.xy += repelDir * (2.0 - dist) * 0.2;
+        float force = (3.0 - dist);
+        // Add random scatter to force
+        float noise = random(finalPos.xy + uTime) * 0.5;
+        finalPos.xy += repelDir * force * 0.8 + noise;
+        finalPos.z += force * 0.5;
       }
       
       vPos = finalPos;
@@ -64,7 +67,10 @@ const CustomShaderMaterial = {
       vec4 modelViewPosition = modelViewMatrix * vec4(finalPos, 1.0);
       gl_Position = projectionMatrix * modelViewPosition;
       
-      gl_PointSize = (100.0 / -modelViewPosition.z); // Scale by depth
+      // Size attenuation
+      gl_PointSize = (120.0 / -modelViewPosition.z); 
+      // Twinkle size
+      gl_PointSize *= (0.8 + 0.4 * sin(uTime * 5.0 + finalPos.x));
     }
   `,
     fragmentShader: `
@@ -175,8 +181,11 @@ function DNAWave() {
         // Slowly rotate the whole DNA structure if in DNA mode? 
         // Or let the shader handle everything. 
         // Let's add slight rotation for visual interest
+        // Slowly rotate the whole DNA structure
         if (pointsRef.current) {
-            // pointsRef.current.rotation.y = clock.getElapsedTime() * 0.05;
+            pointsRef.current.rotation.y = clock.getElapsedTime() * 0.1;
+            // Gentle floating oscillation
+            pointsRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.3) * 0.5;
         }
     });
 

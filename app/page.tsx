@@ -4,10 +4,10 @@ import AuthGuard from "@/components/AuthGuard";
 export default function Home() {
   return (
     <AuthGuard>
-      <main className="flex min-h-screen flex-col items-center justify-center p-24 text-white relative">
+      <main className="flex min-h-screen flex-col items-center justify-center p-24 text-white relative pointer-events-none">
         <Background3D />
 
-        <div className="z-10 text-center space-y-8 backdrop-blur-sm bg-black/30 p-12 rounded-2xl border border-white/10">
+        <div className="z-10 text-center space-y-8 backdrop-blur-sm bg-black/30 p-12 rounded-2xl border border-white/10 pointer-events-auto">
           <h1 className="text-6xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
             Faciodeck
           </h1>
