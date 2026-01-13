@@ -49,7 +49,7 @@ const teamMembers = [
         details: [
             { highlight: "Global Ops", desc: "Decades in Fintech/Insurtech building Professional Services & Customer Success teams." },
             { highlight: "Builder", desc: "Built training divisions from scratch for a $3B Bank and scaled systems for 20k+ users." },
-            { highlight: "Elite Background", desc: "Electronics Engineer + MBA (Highest Honors). Combat Engineering Officer & EMT." },
+            { highlight: "Elite Background", desc: "Electronics Engineer + MBA (Highest Honors). PhD Augmented Reality. Combat Engineering Officer & EMT." },
             { highlight: "Superpower", desc: "Building the \"Machine\" that allows us to onboard 40+ customers." }
         ]
     }
