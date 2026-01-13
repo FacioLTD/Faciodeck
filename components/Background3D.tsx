@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
@@ -128,25 +128,38 @@ function MagicalParticles() {
         return [pos, rand, sz];
     }, []);
 
+    // Use a ref for mouse position to avoid re-renders
+    const mouseRef = useRef({ x: 0, y: 0 });
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            // Normalize to -1 to 1
+            mouseRef.current = {
+                x: (e.clientX / window.innerWidth) * 2 - 1,
+                y: -(e.clientY / window.innerHeight) * 2 + 1
+            };
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
     const uniforms = useMemo(() => ({
         uTime: { value: 0 },
         uMousePosition: { value: new THREE.Vector2(0, 0) }
     }), []);
 
     useFrame((state) => {
-        const { clock, pointer, viewport } = state;
+        const { clock, viewport } = state;
 
         if (pointsRef.current) {
             // @ts-ignore
             pointsRef.current.material.uniforms.uTime.value = clock.getElapsedTime();
 
-            // Screen pointer (-1 to 1) -> World Space conversion
-            // This is an approximation assuming particles are near Z=0 and camera is at Z=15
-            const x = (pointer.x * viewport.width) / 2;
-            const y = (pointer.y * viewport.height) / 2;
+            // Calculate world position based on global mouse ref and current viewport
+            const x = (mouseRef.current.x * viewport.width) / 2;
+            const y = (mouseRef.current.y * viewport.height) / 2;
 
-            // We can add "lag" or smoothing here for weightier feel using lerp
-            // But raw input is most responsive
             // @ts-ignore
             pointsRef.current.material.uniforms.uMousePosition.value.set(x, y);
         }
