@@ -1,13 +1,13 @@
 import { ShieldCheck, CheckCircle2 } from "lucide-react";
 
 const logos = [
-    "Berkshire Hathaway",
-    "Generali",
-    "Mapfre",
-    "Aflac",
-    "Harel",
-    "Howden",
-    "AmTrust"
+    { name: "Berkshire Hathaway", src: "/images/logos/berkshire.png" },
+    { name: "Generali", src: "/images/logos/generali.svg" },
+    { name: "Mapfre", src: "/images/logos/mapfre.png" },
+    { name: "Aflac", src: "/images/logos/aflac.png" },
+    { name: "Harel", src: "/images/logos/harel.png" },
+    { name: "Howden", src: "/images/logos/howden.png" },
+    { name: "AmTrust", src: "/images/logos/amtrust.png" }
 ];
 
 export function TechValidation() {
@@ -34,11 +34,24 @@ export function TechValidation() {
                         <p className="text-center text-sm font-semibold text-slate-500 uppercase tracking-widest mb-6">
                             Pilots & Technical Validation with
                         </p>
-                        <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4 opacity-70">
+                        <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6 opacity-80">
                             {logos.map((logo, index) => (
-                                <span key={index} className="text-xl md:text-2xl font-bold text-slate-400 hover:text-white transition-colors cursor-default">
-                                    {logo}
-                                </span>
+                                <div key={index} className="relative h-12 w-32 grayscale hover:grayscale-0 transition-all duration-300">
+                                    <img
+                                        src={logo.src}
+                                        alt={logo.name}
+                                        title={logo.name}
+                                        className="object-contain w-full h-full"
+                                        onError={(e) => {
+                                            e.currentTarget.style.display = 'none';
+                                            // Fallback text
+                                            const span = document.createElement('span');
+                                            span.className = 'text-lg font-bold text-slate-400';
+                                            span.innerText = logo.name;
+                                            e.currentTarget.parentElement?.appendChild(span);
+                                        }}
+                                    />
+                                </div>
                             ))}
                         </div>
                     </div>
