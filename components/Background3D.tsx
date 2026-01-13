@@ -105,7 +105,7 @@ function MagicalParticles() {
 
     // Initial Data Generation
     // Count: Reduced for "minimal" feel
-    const count = 3000;
+    const count = 1800;
 
     const [positions, randoms, sizes] = useMemo(() => {
         const pos = new Float32Array(count * 3);
@@ -163,21 +163,16 @@ function MagicalParticles() {
             // @ts-ignore
             pointsRef.current.material.uniforms.uMousePosition.value.set(x, y);
 
-            // Update debug marker
-            const marker = state.scene.getObjectByName("debug-marker");
-            if (marker) {
-                marker.position.set(x, y, 0);
-            }
+            // @ts-ignore
+            pointsRef.current.material.uniforms.uMousePosition.value.set(x, y);
+
+            // Removed debug marker updates
         }
     });
 
     return (
         <group>
-            {/* Visual Debug Marker - RED SPHERE to track mouse */}
-            <mesh name="debug-marker" position={[0, 0, 0]}>
-                <sphereGeometry args={[0.5, 16, 16]} />
-                <meshBasicMaterial color="red" wireframe />
-            </mesh>
+            {/* Visual Debug Marker Removed */}
 
             <points ref={pointsRef}>
                 <bufferGeometry>

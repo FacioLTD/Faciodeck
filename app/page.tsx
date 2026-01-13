@@ -5,11 +5,13 @@ import AuthGuard from "@/components/AuthGuard";
 import { Hero } from "@/components/Hero";
 import { Problem } from "@/components/Problem";
 import { Solution } from "@/components/Solution";
+import { TechValidation } from "@/components/TechValidation";
 import { Traction } from "@/components/Traction";
 import { Opportunity } from "@/components/Opportunity";
 import { FinancialForecast } from "@/components/FinancialForecast";
 import { DeepTech } from "@/components/DeepTech";
 import { Partners } from "@/components/Partners";
+import { Team } from "@/components/Team";
 import { TheAsk } from "@/components/TheAsk";
 import { Contact } from "@/components/Contact";
 
@@ -26,11 +28,13 @@ export default function Home() {
           <Hero />
           <Problem />
           <Solution />
+          <TechValidation />
           <Traction />
           <Opportunity />
           <FinancialForecast />
           <DeepTech />
           <Partners />
+          <Team />
           <TheAsk />
           <Contact />
         </div>

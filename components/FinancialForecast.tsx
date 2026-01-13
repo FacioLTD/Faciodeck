@@ -18,7 +18,7 @@ export function FinancialForecast() {
             Transitioning from Founder-led sales to a Scalable Revenue Machine
           </p>
         </div>
-        
+
         {/* Growth chart */}
         <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 mb-8">
           <h3 className="text-xl mb-6 text-white">ARR Growth: $1M → $2.4M</h3>
@@ -27,12 +27,14 @@ export function FinancialForecast() {
               <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
               <XAxis dataKey="label" stroke="#94a3b8" />
               <YAxis stroke="#94a3b8" tickFormatter={(value) => `$${value}k`} />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: '#1e293b', 
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#1e293b',
                   border: '1px solid #475569',
                   borderRadius: '8px'
                 }}
+                itemStyle={{ color: '#fff' }}
+                labelStyle={{ color: '#94a3b8' }}
                 formatter={(value) => [`$${value}k ARR`, 'Value']}
               />
               <Bar dataKey="arr" radius={[8, 8, 0, 0]}>
@@ -43,7 +45,7 @@ export function FinancialForecast() {
             </BarChart>
           </ResponsiveContainer>
         </div>
-        
+
         {/* Metrics table */}
         <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl overflow-hidden mb-8">
           <table className="w-full">
@@ -77,7 +79,7 @@ export function FinancialForecast() {
             </tbody>
           </table>
         </div>
-        
+
         {/* Key highlights */}
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 border border-blue-500/50 rounded-xl p-6 text-center">
@@ -86,14 +88,14 @@ export function FinancialForecast() {
             <div className="text-sm text-slate-400">Customer Growth</div>
             <div className="text-xs text-blue-400 mt-1">8 → 40+ customers</div>
           </div>
-          
+
           <div className="bg-gradient-to-br from-purple-900/40 to-purple-800/40 border border-purple-500/50 rounded-xl p-6 text-center">
             <DollarSign className="text-purple-400 mx-auto mb-3" size={32} />
             <div className="text-3xl text-white mb-2">2.4x</div>
             <div className="text-sm text-slate-400">ARR Growth</div>
             <div className="text-xs text-purple-400 mt-1">$1M → $2.4M</div>
           </div>
-          
+
           <div className="bg-gradient-to-br from-green-900/40 to-green-800/40 border border-green-500/50 rounded-xl p-6 text-center">
             <TrendingUp className="text-green-400 mx-auto mb-3" size={32} />
             <div className="text-3xl text-white mb-2">Ready</div>
