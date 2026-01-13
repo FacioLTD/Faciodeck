@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef, useEffect } from "react";
+import React, { useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
@@ -8,184 +8,147 @@ import { EffectComposer, Bloom } from "@react-three/postprocessing";
 const CustomShaderMaterial = {
     vertexShader: `
     uniform float uTime;
-    uniform vec2 uMousePosition;
-    uniform vec2 uResolution;
+    uniform vec2 uMousePosition; // World space coordinates
     
-    attribute vec3 positionDNA;
-    attribute vec3 positionSound;
-    attribute float colorType; // 0.0 to 1.0
+    attribute vec3 positionInitial;
+    attribute float aRandom;     // Random 0..1 for variety
+    attribute float aSize;       // Random size factor
     
-    varying float vColorType;
-    varying vec3 vPos;
-
-    // Simple pseudo-random noise
-    float random(vec2 st) {
-        return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
-    }
+    varying float vAlpha;
 
     void main() {
-      vColorType = colorType;
-
-      // 1. Calculate Sound position (Wave)
-      vec3 currentSoundPos = positionSound;
-      // Complex wave motion
-      float wave = sin(uTime * 1.5 + positionSound.x * 0.4) * 1.5;
-      wave += cos(uTime * 2.2 + positionSound.x * 0.8) * 0.5;
-      currentSoundPos.y += wave;
-      currentSoundPos.z += sin(uTime * 0.5 + positionSound.y) * 0.5;
-
-      // 2. DNA Position (Breathing/Living)
-      vec3 currentDNAPos = positionDNA;
-      // Gentle floating drift based on position and time
-      float drift = sin(uTime * 0.5 + positionDNA.y * 0.5) * 0.1;
-      currentDNAPos.x += drift;
-      currentDNAPos.z += cos(uTime * 0.3 + positionDNA.x) * 0.1;
-
-      // 3. Interaction
-      // Map mouse from screen space (-height/2 to height/2 approx) to world
-      // Assuming camera z=15, simple distance check.
-      float dist = distance(uMousePosition, currentDNAPos.xy); 
+      // 1. Base Position: Drift over time
+      // Use simple noise-like movement based on initial pos
+      vec3 pos = positionInitial;
       
-      // Radius of influence - make it responsive
-      float influence = smoothstep(5.0, 0.0, dist); 
+      // Gentle floating (Brownian-like)
+      float speed = 0.2;
+      pos.x += sin(uTime * speed + aRandom * 10.0) * 0.5;
+      pos.y += cos(uTime * speed * 0.8 + aRandom * 20.0) * 0.5;
+      pos.z += sin(uTime * speed * 0.5 + aRandom * 30.0) * 0.5;
 
-      // 4. Mix
-      vec3 finalPos = mix(currentDNAPos, currentSoundPos, influence);
-
-      // 5. Repel/Disperse (Quantum Scatter)
-      if (dist < 3.0) {
-        vec2 repelDir = normalize(finalPos.xy - uMousePosition);
-        float force = (3.0 - dist);
-        // Add random scatter to force
-        float noise = random(finalPos.xy + uTime) * 0.5;
-        finalPos.xy += repelDir * force * 0.8 + noise;
-        finalPos.z += force * 0.5;
+      // 2. Mouse Attraction (The "Magical" Part)
+      // Calculate vector to mouse (uMousePosition is xy at specific z depth logic, but here we treat as 2D attractor in 3D space)
+      
+      // We assume mouse affects xy plane primarily, z is just depth
+      float dist = distance(pos.xy, uMousePosition);
+      
+      // Attraction range
+      float range = 8.0; 
+      
+      if (dist < range) {
+        float strength = (range - dist) / range; // 0 to 1 (1 at center)
+        strength = pow(strength, 2.0); // Non-linear falloff
+        
+        // Direction to mouse
+        vec2 dir = normalize(uMousePosition - pos.xy);
+        
+        // Move towards mouse
+        float attractionPower = 3.0 * strength;
+        pos.xy += dir * attractionPower;
+        
+        // Add a "Swirl" - perpendicular vector
+        // Rotated 90 degrees: (x, y) -> (-y, x)
+        vec2 swirlDir = vec2(-dir.y, dir.x);
+        float swirlPower = 2.0 * strength;
+        
+        // Apply swirl based on which "side" or just global swirl
+        // Let's vary swirl direction by particle random to create chaos or uniform for vortex
+        // Uniform vortex feels more controlled/magical
+        pos.xy += swirlDir * swirlPower;
+        
+        // Pull Z slightly towards camera or push away?
+        // Let's pull slightly towards camera to make them "pop"
+        pos.z += strength * 2.0;
       }
-      
-      vPos = finalPos;
 
-      vec4 modelViewPosition = modelViewMatrix * vec4(finalPos, 1.0);
+      vec4 modelViewPosition = modelViewMatrix * vec4(pos, 1.0);
       gl_Position = projectionMatrix * modelViewPosition;
       
       // Size attenuation
-      gl_PointSize = (120.0 / -modelViewPosition.z); 
-      // Twinkle size
-      gl_PointSize *= (0.8 + 0.4 * sin(uTime * 5.0 + finalPos.x));
+      gl_PointSize = (aSize * 60.0) / -modelViewPosition.z; 
+      
+      // Interactive size pulse
+      // close to mouse -> bigger?
+      // gl_PointSize *= 1.0 + (5.0 / (dist + 0.1)) * 0.2; // slight scale up near mouse
+
+      // Fade out particles that are too far or behind camera (simple culling visual)
+      vAlpha = 0.6 + 0.4 * sin(uTime + aRandom * 10.0);
     }
   `,
     fragmentShader: `
-    varying float vColorType;
+    varying float vAlpha;
     
     void main() {
-      // Create a nice round particle
+      // Soft particle
       vec2 coord = gl_PointCoord - vec2(0.5);
-      if(length(coord) > 0.5) discard;
+      float dist = length(coord);
       
-      // Colors:
-      // DNA bases colors (Cyan/Magenta/Blue-ish)
-      vec3 color1 = vec3(0.0, 0.8, 1.0); // Cyan
-      vec3 color2 = vec3(1.0, 0.0, 0.5); // Magenta
+      if(dist > 0.5) discard;
       
-      vec3 finalColor = mix(color1, color2, vColorType);
+      // Gradient scale for softness
+      // 0.5 (edge) -> 0.0, 0.0 (center) -> 1.0
+      float strength = 1.0 - (dist * 2.0);
+      strength = pow(strength, 1.5); // Falloff curve
       
-      // Add a glow/intensity falloff
-      float strength = 1.0 - (length(coord) * 2.0);
-      strength = pow(strength, 1.5);
+      // Color: "Magical" Blue/Purple/Cyan mix
+      // Let's keep it very light/white with subtle tint
+      vec3 color = vec3(0.8, 0.9, 1.0); 
       
-      gl_FragColor = vec4(finalColor * strength, 1.0);
+      gl_FragColor = vec4(color, vAlpha * strength);
     }
   `
 };
 
-function DNAWave() {
+function MagicalParticles() {
     const pointsRef = useRef<THREE.Points>(null);
 
-    // Mouse tracking in Three.js coordinates
-    // We'll normalize mouse to world coordinates approx (-10 to 10)
-    const mouse = useRef(new THREE.Vector2(9999, 9999));
+    // Initial Data Generation
+    // Count: Reduced for "minimal" feel
+    const count = 3000;
 
-    useThree(({ camera, pointer, viewport }) => {
-        // Update mouse ref on each frame or event if needed, 
-        // but `pointer` from useThree is reactive-ish.
-        // Actually we can just read `pointer` in useFrame.
-    });
+    const [positions, randoms, sizes] = useMemo(() => {
+        const pos = new Float32Array(count * 3);
+        const rand = new Float32Array(count);
+        const sz = new Float32Array(count);
 
-    // Generate Data
-    const count = 10000;
-    const positionsDNA = useMemo(() => new Float32Array(count * 3), []);
-    const positionsSound = useMemo(() => new Float32Array(count * 3), []);
-    const colorTypes = useMemo(() => new Float32Array(count), []);
+        // Distribution area
+        const spread = 25; // Wide area to cover screen
 
-    useMemo(() => {
         for (let i = 0; i < count; i++) {
-            // DNA Helix Generation
-            // A double helix along Y axis? Prompt said Y axis.
-            const t = (i / count) * 40.0 - 20.0; // Y range -20 to 20
-            const radius = 2.0;
-            const angle = t * 2.0;
+            // Random distribution
+            pos[i * 3] = (Math.random() - 0.5) * spread;     // x
+            pos[i * 3 + 1] = (Math.random() - 0.5) * spread; // y
+            pos[i * 3 + 2] = (Math.random() - 0.5) * 10;     // z depth
 
-            // Strand 1 (odds) vs Strand 2 (evens)
-            const strand = i % 2 === 0 ? 0 : Math.PI;
-
-            const x = Math.cos(angle + strand) * radius;
-            const y = t;
-            const z = Math.sin(angle + strand) * radius;
-
-            // Add some noise/scatter to give it volume
-            const spread = 0.2;
-            positionsDNA[i * 3] = x + (Math.random() - 0.5) * spread;
-            positionsDNA[i * 3 + 1] = y + (Math.random() - 0.5) * spread;
-            positionsDNA[i * 3 + 2] = z + (Math.random() - 0.5) * spread;
-
-            // Sound/Wave Configuration
-            // A grid or a long line? 
-            // "Sound state: Where it should be as part of the wave"
-            // Let's make a flat plane or line that will undulate
-            // Spread across X axis
-            const sx = (i / count) * 40.0 - 20.0; // X range -20 to 20
-            const sy = (Math.random() - 0.5) * 5.0; // Random Y height band
-            const sz = 0.0; // Flat on Z initially
-
-            positionsSound[i * 3] = sx;
-            positionsSound[i * 3 + 1] = sy;
-            positionsSound[i * 3 + 2] = sz;
-
-            // Color Type
-            colorTypes[i] = Math.random();
+            rand[i] = Math.random();
+            sz[i] = Math.random() * 1.5 + 0.5; // size multiplier
         }
-    }, [positionsDNA, positionsSound, colorTypes]);
+
+        return [pos, rand, sz];
+    }, []);
 
     const uniforms = useMemo(() => ({
         uTime: { value: 0 },
-        uMousePosition: { value: new THREE.Vector2(0, 0) },
-        uResolution: { value: new THREE.Vector2(100, 100) } // placeholder
+        uMousePosition: { value: new THREE.Vector2(0, 0) }
     }), []);
 
     useFrame((state) => {
         const { clock, pointer, viewport } = state;
 
-        // Update Time
         if (pointsRef.current) {
             // @ts-ignore
             pointsRef.current.material.uniforms.uTime.value = clock.getElapsedTime();
 
-            // Update Mouse - Convert normalized pointer (-1 to 1) to approximate world coords
-            // Assuming a camera at z=10 looking at 0,0,0, viewport width covers the view.
+            // Screen pointer (-1 to 1) -> World Space conversion
+            // This is an approximation assuming particles are near Z=0 and camera is at Z=15
             const x = (pointer.x * viewport.width) / 2;
             const y = (pointer.y * viewport.height) / 2;
 
+            // We can add "lag" or smoothing here for weightier feel using lerp
+            // But raw input is most responsive
             // @ts-ignore
             pointsRef.current.material.uniforms.uMousePosition.value.set(x, y);
-        }
-
-        // Slowly rotate the whole DNA structure if in DNA mode? 
-        // Or let the shader handle everything. 
-        // Let's add slight rotation for visual interest
-        // Slowly rotate the whole DNA structure
-        if (pointsRef.current) {
-            pointsRef.current.rotation.y = clock.getElapsedTime() * 0.1;
-            // Gentle floating oscillation
-            pointsRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.3) * 0.5;
         }
     });
 
@@ -194,19 +157,19 @@ function DNAWave() {
             <bufferGeometry>
                 <bufferAttribute
                     attach="attributes-position"
-                    args={[positionsDNA, 3]}
+                    args={[positions, 3]}
                 />
                 <bufferAttribute
-                    attach="attributes-positionDNA"
-                    args={[positionsDNA, 3]}
+                    attach="attributes-positionInitial" // Separate attribute for shader anchor
+                    args={[positions, 3]}
                 />
                 <bufferAttribute
-                    attach="attributes-positionSound"
-                    args={[positionsSound, 3]}
+                    attach="attributes-aRandom"
+                    args={[randoms, 1]}
                 />
                 <bufferAttribute
-                    attach="attributes-colorType"
-                    args={[colorTypes, 1]}
+                    attach="attributes-aSize"
+                    args={[sizes, 1]}
                 />
             </bufferGeometry>
             <shaderMaterial
@@ -223,11 +186,12 @@ function DNAWave() {
 
 export default function Background3D() {
     return (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, background: '#000' }}>
-            <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
-                <DNAWave />
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, background: '#000', pointerEvents: 'none' }}>
+            <Canvas camera={{ position: [0, 0, 15], fov: 60 }} dpr={[1, 2]}> {/* Optimized DPR */}
+                <MagicalParticles />
                 <EffectComposer>
-                    <Bloom luminanceThreshold={0.2} luminanceSmoothing={0.9} height={300} intensity={1.5} />
+                    {/* Subtle bloom for the "magic" glow */}
+                    <Bloom luminanceThreshold={0.5} luminanceSmoothing={0.9} height={300} intensity={0.5} />
                 </EffectComposer>
             </Canvas>
         </div>
