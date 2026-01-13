@@ -162,38 +162,52 @@ function MagicalParticles() {
 
             // @ts-ignore
             pointsRef.current.material.uniforms.uMousePosition.value.set(x, y);
+
+            // Update debug marker
+            const marker = state.scene.getObjectByName("debug-marker");
+            if (marker) {
+                marker.position.set(x, y, 0);
+            }
         }
     });
 
     return (
-        <points ref={pointsRef}>
-            <bufferGeometry>
-                <bufferAttribute
-                    attach="attributes-position"
-                    args={[positions, 3]}
+        <group>
+            {/* Visual Debug Marker - RED SPHERE to track mouse */}
+            <mesh name="debug-marker" position={[0, 0, 0]}>
+                <sphereGeometry args={[0.5, 16, 16]} />
+                <meshBasicMaterial color="red" wireframe />
+            </mesh>
+
+            <points ref={pointsRef}>
+                <bufferGeometry>
+                    <bufferAttribute
+                        attach="attributes-position"
+                        args={[positions, 3]}
+                    />
+                    <bufferAttribute
+                        attach="attributes-positionInitial"
+                        args={[positions, 3]}
+                    />
+                    <bufferAttribute
+                        attach="attributes-aRandom"
+                        args={[randoms, 1]}
+                    />
+                    <bufferAttribute
+                        attach="attributes-aSize"
+                        args={[sizes, 1]}
+                    />
+                </bufferGeometry>
+                <shaderMaterial
+                    vertexShader={CustomShaderMaterial.vertexShader}
+                    fragmentShader={CustomShaderMaterial.fragmentShader}
+                    uniforms={uniforms}
+                    transparent
+                    depthWrite={false}
+                    blending={THREE.AdditiveBlending}
                 />
-                <bufferAttribute
-                    attach="attributes-positionInitial" // Separate attribute for shader anchor
-                    args={[positions, 3]}
-                />
-                <bufferAttribute
-                    attach="attributes-aRandom"
-                    args={[randoms, 1]}
-                />
-                <bufferAttribute
-                    attach="attributes-aSize"
-                    args={[sizes, 1]}
-                />
-            </bufferGeometry>
-            <shaderMaterial
-                vertexShader={CustomShaderMaterial.vertexShader}
-                fragmentShader={CustomShaderMaterial.fragmentShader}
-                uniforms={uniforms}
-                transparent
-                depthWrite={false}
-                blending={THREE.AdditiveBlending}
-            />
-        </points>
+            </points>
+        </group>
     );
 }
 
