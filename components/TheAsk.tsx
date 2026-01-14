@@ -7,10 +7,10 @@ export function TheAsk() {
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mb-4 text-white">The Ask</h2>
           <div className="text-5xl text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text mb-4">
-            $500k Precision Round <span className="text-2xl block md:inline text-white mt-2 md:mt-0">(Strategic Lead Only)</span>
+            $500k Precision Round
           </div>
           <p className="text-xl text-slate-300 mb-2 max-w-3xl mx-auto">
-            <span className="font-semibold text-white">The Goal:</span> Convert founder-led traction into a repeatable sales engine. We’re optimizing for the right partner, not the biggest check.
+            <span className="font-semibold text-white">The Goal:</span> Convert founder-led traction into a repeatable sales engine with a lead investor who adds distribution and operating leverage.
           </p>
           <div className="inline-block px-4 py-2 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-400 mt-4">
             Terms: $10M Cap (SAFE)

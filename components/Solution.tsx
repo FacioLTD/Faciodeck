@@ -1,4 +1,5 @@
 import { Code2, Zap, Rocket, Check, X } from "lucide-react";
+import { CommercialComparisonTable } from "./CommercialComparisonTable";
 
 export function Solution() {
   return (
@@ -41,6 +42,25 @@ export function Solution() {
             <p className="text-slate-400">
               "MGA Launch Kit" enables <span className="text-purple-400 font-semibold">Go-Live in under 60 days</span>
             </p>
+          </div>
+        </div>
+
+        {/* Value prop - Moved above Commercial Model */}
+        <div className="mb-12 relative bg-slate-900/50 backdrop-blur-sm border border-green-500/30 rounded-2xl p-8 overflow-hidden">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
+          <div className="relative text-center">
+            <h3 className="text-2xl mb-4 text-white">Complete Workflow Automation</h3>
+            <div className="flex flex-wrap justify-center items-center gap-4 text-lg">
+              <span className="text-slate-300">Quote</span>
+              <span className="text-green-400">→</span>
+              <span className="text-slate-300">Bind</span>
+              <span className="text-green-400">→</span>
+              <span className="text-slate-300">Bordereaux</span>
+              <span className="text-green-400">→</span>
+              <span className="text-slate-300">Reconciliation</span>
+              <span className="text-green-400">→</span>
+              <span className="text-green-400 font-semibold">Audit Ready</span>
+            </div>
           </div>
         </div>
 
@@ -129,66 +149,9 @@ export function Solution() {
           </div>
         </div>
 
-        {/* Value prop */}
-        <div className="relative bg-slate-900/50 backdrop-blur-sm border border-green-500/30 rounded-2xl p-8 overflow-hidden">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
-          <div className="relative text-center">
-            <h3 className="text-2xl mb-4 text-white">Complete Workflow Automation</h3>
-            <div className="flex flex-wrap justify-center items-center gap-4 text-lg">
-              <span className="text-slate-300">Quote</span>
-              <span className="text-green-400">→</span>
-              <span className="text-slate-300">Bind</span>
-              <span className="text-green-400">→</span>
-              <span className="text-slate-300">Bordereaux</span>
-              <span className="text-green-400">→</span>
-              <span className="text-slate-300">Reconciliation</span>
-              <span className="text-green-400">→</span>
-              <span className="text-green-400 font-semibold">Audit Ready</span>
-            </div>
-          </div>
-        </div>
-
         {/* Competitive Landscape */}
-        <div className="mt-12 bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-2xl p-8 max-w-4xl mx-auto">
-          <h3 className="text-xl font-bold text-white mb-6 text-center">Competitive Landscape (Why we win)</h3>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-slate-700 text-slate-400 text-sm">
-                  <th className="py-3 px-4 font-normal">Feature</th>
-                  <th className="py-3 px-4 font-semibold text-blue-400 text-center bg-blue-500/5 rounded-t-lg">Facio</th>
-                  <th className="py-3 px-4 font-normal text-center">Generic PAS</th>
-                  <th className="py-3 px-4 font-normal text-center">Excel</th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="border-b border-slate-800">
-                  <td className="py-3 px-4 text-slate-300">Lloyd's bordereaux + complex splits</td>
-                  <td className="py-3 px-4 text-center bg-blue-500/5"><Check className="inline text-green-400" size={18} /></td>
-                  <td className="py-3 px-4 text-center text-yellow-500">⚠️</td>
-                  <td className="py-3 px-4 text-center text-red-500"><X className="inline" size={18} /></td>
-                </tr>
-                <tr className="border-b border-slate-800">
-                  <td className="py-3 px-4 text-slate-300">Audit-ready reconciliation</td>
-                  <td className="py-3 px-4 text-center bg-blue-500/5"><Check className="inline text-green-400" size={18} /></td>
-                  <td className="py-3 px-4 text-center text-yellow-500">⚠️</td>
-                  <td className="py-3 px-4 text-center text-red-500"><X className="inline" size={18} /></td>
-                </tr>
-                <tr className="border-b border-slate-800">
-                  <td className="py-3 px-4 text-slate-300">Go-live speed (≤60 days)</td>
-                  <td className="py-3 px-4 text-center bg-blue-500/5"><Check className="inline text-green-400" size={18} /></td>
-                  <td className="py-3 px-4 text-center text-red-500"><X className="inline" size={18} /></td>
-                  <td className="py-3 px-4 text-center text-slate-500">-</td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 text-slate-300">Total cost to operate (mid-market)</td>
-                  <td className="py-3 px-4 text-center bg-blue-500/5 rounded-b-lg"><Check className="inline text-green-400" size={18} /></td>
-                  <td className="py-3 px-4 text-center text-red-500"><X className="inline" size={18} /></td>
-                  <td className="py-3 px-4 text-center text-red-500"><X className="inline" size={18} /></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div className="mt-12">
+          <CommercialComparisonTable />
         </div>
 
       </div>

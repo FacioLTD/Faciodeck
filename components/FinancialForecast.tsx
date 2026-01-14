@@ -28,6 +28,7 @@ export function FinancialForecast() {
               <XAxis dataKey="label" stroke="#94a3b8" />
               <YAxis stroke="#94a3b8" tickFormatter={(value) => `$${value}k`} />
               <Tooltip
+                cursor={{ fill: 'transparent' }}
                 contentStyle={{
                   backgroundColor: '#1e293b',
                   border: '1px solid #475569',
@@ -37,7 +38,15 @@ export function FinancialForecast() {
                 labelStyle={{ color: '#94a3b8' }}
                 formatter={(value) => [`$${value}k ARR`, 'Value']}
               />
-              <Bar dataKey="arr" radius={[8, 8, 0, 0]}>
+              <Bar
+                dataKey="arr"
+                radius={[8, 8, 0, 0]}
+                activeBar={{
+                  filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.7))',
+                  stroke: '#fff',
+                  strokeWidth: 2
+                }}
+              >
                 {growthData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
