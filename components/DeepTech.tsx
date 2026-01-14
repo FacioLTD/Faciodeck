@@ -11,7 +11,7 @@ export function DeepTech() {
             While our core business is Insurance SaaS, our infrastructure has massive potential
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 gap-8">
           {/* GovTech */}
           <div className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 border border-purple-500/30 rounded-xl p-8">
@@ -38,7 +38,7 @@ export function DeepTech() {
               </div>
             </div>
           </div>
-          
+
           {/* Quantum DB */}
           <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 border border-cyan-500/30 rounded-xl p-8">
             <div className="flex items-start gap-4 mb-6">
@@ -48,7 +48,7 @@ export function DeepTech() {
               <div>
                 <h3 className="text-2xl mb-2 text-white">Quantum DB</h3>
                 <div className="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm mb-3">
-                  POC Planned Month 12
+                  Future / Optional
                 </div>
               </div>
             </div>
@@ -65,11 +65,11 @@ export function DeepTech() {
             </div>
           </div>
         </div>
-        
+
         {/* Strategic note */}
         <div className="mt-8 bg-slate-900/50 backdrop-blur-sm border border-cyan-500/30 rounded-xl p-6 text-center">
           <p className="text-slate-300">
-            <span className="text-cyan-400 font-semibold">Insurance SaaS</span> is the wedge. <span className="text-purple-400 font-semibold">Deep tech infrastructure</span> is the moat.
+            <span className="text-cyan-400 font-semibold">Insurance SaaS</span> is the business. <span className="text-purple-400 font-semibold">Our infrastructure</span> is a long-term moat and optional expansion.
           </p>
         </div>
       </div>

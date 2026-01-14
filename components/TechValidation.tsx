@@ -30,7 +30,7 @@ export function TechValidation() {
 
                     <div className="mb-12">
                         <p className="text-center text-sm font-semibold text-slate-500 uppercase tracking-widest mb-6">
-                            Pilots & Technical Validation with
+                            Validated with
                         </p>
                         <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-6">
                             {logos.map((logo, index) => (
@@ -59,8 +59,11 @@ export function TechValidation() {
                             <CheckCircle2 className="text-green-400 shrink-0 mt-1" size={24} />
                             <div>
                                 <h4 className="text-white font-semibold mb-1">Why we pivoted:</h4>
-                                <p className="text-slate-300 italic">
+                                <p className="text-slate-300 italic mb-2">
                                     "We proved the tech works at the enterprise level, then pointed it at the MGA market for rapid sales velocity."
+                                </p>
+                                <p className="text-sm text-blue-400 font-semibold">
+                                    API-first: runs standalone or integrates with accounting, CRM, payments, and insurer systems via REST + webhooks.
                                 </p>
                             </div>
                         </div>

@@ -10,17 +10,17 @@ export function TheAsk() {
             $500k Seed Round
           </div>
           <p className="text-xl text-slate-300 mb-2">
-            Remove the "Founder Bottleneck" and operationalize sales
+            This round converts founder-led delivery into a repeatable onboarding + sales machine
           </p>
           <div className="inline-block px-4 py-2 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-400 mt-4">
             Valuation Target: $10M Cap (SAFE)
           </div>
         </div>
-        
+
         {/* Use of Funds */}
         <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 mb-8">
           <h3 className="text-2xl mb-8 text-center text-white">Use of Funds</h3>
-          
+
           <div className="space-y-6">
             {/* Product & Eng - 40% */}
             <div className="relative">
@@ -43,7 +43,7 @@ export function TheAsk() {
                 <div className="h-full bg-blue-500 rounded-full" style={{ width: '40%' }}></div>
               </div>
             </div>
-            
+
             {/* Go-to-Market - 30% */}
             <div className="relative">
               <div className="flex items-start gap-4 mb-2">
@@ -65,7 +65,7 @@ export function TheAsk() {
                 <div className="h-full bg-purple-500 rounded-full" style={{ width: '30%' }}></div>
               </div>
             </div>
-            
+
             {/* Operations - 30% */}
             <div className="relative">
               <div className="flex items-start gap-4 mb-2">
@@ -78,7 +78,7 @@ export function TheAsk() {
                     <div className="text-2xl text-green-400 font-semibold">30%</div>
                   </div>
                   <p className="text-slate-400 mb-2">
-                    Customer Success hires to remove the CEO from support tickets
+                    establish Customer Success to protect retention and reduce founder dependency
                   </p>
                   <div className="text-sm text-green-400">$150k</div>
                 </div>
@@ -89,7 +89,7 @@ export function TheAsk() {
             </div>
           </div>
         </div>
-        
+
         {/* The outcome */}
         <div className="relative overflow-hidden bg-gradient-to-br from-blue-900/40 via-purple-900/40 to-pink-900/40 border-2 border-purple-500/50 rounded-2xl p-8">
           <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl"></div>

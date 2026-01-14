@@ -66,13 +66,13 @@ export function FinancialForecast() {
               </tr>
               <tr className="border-t border-slate-700 bg-slate-800/30">
                 <td className="px-6 py-4 text-slate-300">MRR</td>
-                <td className="px-6 py-4 text-center text-white">~$83k (Contracted)</td>
+                <td className="px-6 py-4 text-center text-white">~$83k (contracted; rollout in progress)</td>
                 <td className="px-6 py-4 text-center text-white">$125k</td>
                 <td className="px-6 py-4 text-center text-white font-semibold">$200k</td>
               </tr>
               <tr className="border-t border-slate-700">
                 <td className="px-6 py-4 text-slate-300">ARR</td>
-                <td className="px-6 py-4 text-center text-white">$1M</td>
+                <td className="px-6 py-4 text-center text-white">$1M (Contracted)</td>
                 <td className="px-6 py-4 text-center text-white">$1.5M</td>
                 <td className="px-6 py-4 text-center text-white font-semibold">$2.4M</td>
               </tr>
