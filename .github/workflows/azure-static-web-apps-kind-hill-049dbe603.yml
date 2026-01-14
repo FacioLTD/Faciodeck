@@ -30,7 +30,10 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: |
+          npm run build
+          echo "Verifying build output..."
+          ls -la out/
         env:
           CI: true
 
@@ -43,10 +46,10 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "out" # Built app content directory - pointing to the manual build output
+          app_location: "/" # Keep at root so it finds package.json/config
           api_location: "" # Api source code path - optional
-          output_location: "" # Leave empty when skipping build
-          skip_app_build: true
+          output_location: "out" # Point to the folder usually created by next export
+          skip_app_build: true # We just built it manually above
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
