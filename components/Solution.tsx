@@ -45,26 +45,87 @@ export function Solution() {
         </div>
 
         {/* Pricing Block */}
-        <div className="mb-12 bg-slate-800/40 border border-slate-700 rounded-xl p-8 max-w-3xl mx-auto">
-          <h3 className="text-xl font-bold text-white mb-6 text-center">Pricing (3 Components)</h3>
-          <div className="grid md:grid-cols-3 gap-6 text-sm mb-6">
-            <div className="bg-slate-900/50 p-4 rounded-lg border border-slate-700/50">
-              <div className="font-semibold text-blue-400 mb-1">Platform Subscription</div>
-              <div className="text-slate-300">$65 / user / month</div>
-            </div>
-            <div className="bg-slate-900/50 p-4 rounded-lg border border-slate-700/50">
-              <div className="font-semibold text-blue-400 mb-1">Cloud Infrastructure</div>
-              <div className="text-slate-300">Tiered (IC10–IC50)</div>
-            </div>
-            <div className="bg-slate-900/50 p-4 rounded-lg border border-slate-700/50">
-              <div className="font-semibold text-blue-400 mb-1">Implementation</div>
-              <div className="text-slate-300">Hourly w/ volume discounts</div>
+        {/* Commercial Model Block */}
+        <div className="mb-12 bg-slate-800/40 border border-slate-700 rounded-xl p-8 max-w-5xl mx-auto relative overflow-hidden">
+          {/* Headline Strategy Badge */}
+          <div className="absolute top-0 right-0 bg-gradient-to-l from-green-500/20 to-transparent px-4 py-2 rounded-bl-xl border-b border-l border-green-500/30">
+            <span className="text-xs font-semibold text-green-400 tracking-wider">DISRUPTIVE MODEL: ZERO CAPEX</span>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-end mb-8 mt-2">
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-2">Commercial Model</h3>
+              <p className="text-slate-400 text-sm max-w-xl">
+                We waive the industry-standard $50k+ setup fee in exchange for a high-value monthly retainer. <span className="text-white font-semibold">Zero CapEx for the client. Higher ARR for us.</span>
+              </p>
             </div>
           </div>
-          <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4 text-center">
-            <p className="text-slate-300">
-              <span className="font-semibold text-white">Example (15 users):</span> $975 seats + ~$1.6k–$2.4k cloud + ~$1.5k–$2.5k services ⇒ <span className="font-bold text-white">~$4.1k–$5.9k/month typical</span>
-            </p>
+
+          {/* 3 Revenue Streams Columns */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {/* Column 1 */}
+            <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700/50 flex flex-col items-center text-center">
+              <div className="text-xs uppercase tracking-widest text-slate-500 mb-2 font-semibold">1. Platform License</div>
+              <div className="text-3xl font-bold text-white mb-1">$65</div>
+              <div className="text-xs text-slate-400 mb-4">/ user / mo</div>
+              <div className="w-full border-t border-slate-700/50 pt-3 mt-auto">
+                <span className="text-blue-400 text-sm font-medium">Core SaaS Subscription</span>
+              </div>
+            </div>
+
+            {/* Column 2 */}
+            <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700/50 flex flex-col items-center text-center">
+              <div className="text-xs uppercase tracking-widest text-slate-500 mb-2 font-semibold">2. Cloud Infrastructure</div>
+              <div className="text-2xl font-bold text-white mb-2 mt-1">Usage Based</div>
+              <div className="text-xs text-slate-400 mb-4 opacity-0">spacer</div> {/* invisible spacer for alignment */}
+              <div className="w-full border-t border-slate-700/50 pt-3 mt-auto">
+                <span className="text-purple-400 text-sm font-medium">Pass-through Compute</span>
+              </div>
+            </div>
+
+            {/* Column 3 */}
+            <div className="bg-gradient-to-b from-green-900/10 to-slate-900/50 p-6 rounded-lg border border-green-500/30 flex flex-col items-center text-center relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-500 text-slate-900 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                VALUE DRIVER
+              </div>
+              <div className="text-xs uppercase tracking-widest text-green-400 mb-2 font-semibold">3. Managed Success</div>
+              <div className="text-3xl font-bold text-white mb-1">$2,000+</div>
+              <div className="text-xs text-slate-400 mb-4">/ mo</div>
+              <div className="w-full border-t border-green-500/30 pt-3 mt-auto">
+                <span className="text-green-400 text-sm font-medium">Amortized Implementation</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Deal Economics Bar */}
+          <div className="bg-slate-900/80 border border-slate-700 rounded-lg p-5 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="text-left flex-1 border-r border-slate-700/50 pr-6 mr-2 hidden md:block">
+              <div className="text-xs text-slate-500 uppercase tracking-wider mb-2">Deal Profile (15 Users)</div>
+              <div className="space-y-1 text-sm">
+                <div className="flex justify-between"><span className="text-slate-400">SaaS License:</span> <span className="text-slate-200 font-mono">$975 /mo</span></div>
+                <div className="flex justify-between"><span className="text-slate-400">Cloud Tier 2:</span> <span className="text-slate-200 font-mono">~$2,000 /mo</span></div>
+                <div className="flex justify-between"><span className="text-slate-400">Success Retainer:</span> <span className="text-slate-200 font-mono">$2,025 /mo</span></div>
+              </div>
+            </div>
+
+            <div className="flex-1 flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+              <div className="text-center md:text-right flex-grow">
+                <div className="text-xs text-slate-500 uppercase tracking-wider mb-1">Target MRR</div>
+                <div className="text-3xl font-bold text-white">~$5,000 <span className="text-lg text-slate-500 font-normal">/ mo</span></div>
+                <div className="text-xs text-slate-400">Annual Contract Value: $60,000</div>
+              </div>
+              {/* Competitor Comparison Mini-Box */}
+              <div className="text-xs bg-white/5 p-3 rounded border border-white/10 w-full md:w-auto min-w-[180px]">
+                <div className="flex justify-between border-b border-white/10 pb-1 mb-1">
+                  <span className="text-slate-400">Competitors</span>
+                  <span className="text-red-400 font-mono">$50k Upfront</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-slate-200 font-semibold">Facio</span>
+                  <span className="text-green-400 font-mono">$0 Upfront</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
