@@ -20,8 +20,34 @@ export function Opportunity() {
             <h3 className="text-2xl text-white">The Only Mid-Market Solution</h3>
           </div>
           <p className="text-lg text-slate-300">
-            We are the only solution that combines <span className="text-blue-400 font-semibold">complex financial reconciliation</span> with <span className="text-purple-400 font-semibold">policy management</span> at a mid-market price point.
+            We are the only mid-market solution combining: <br className="hidden md:block" />
+            <span className="text-blue-400 font-semibold">Policy management</span>, <span className="text-purple-400 font-semibold">Financial reconciliation</span>, and <span className="text-green-400 font-semibold">Automated bordereaux</span> at accessible pricing.
           </p>
+        </div>
+
+        {/* Total Addressable Market */}
+        <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 mb-8">
+          <h3 className="text-2xl mb-6 text-white text-center">Total Addressable Market</h3>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h4 className="text-lg text-blue-400 mb-4 font-semibold">Target Profile</h4>
+              <ul className="space-y-3 text-slate-300">
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400">✓</span> <span>MGAs + Lloyd’s Coverholders (total 7,000)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400">✓</span> <span>5–150 employees</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-400">✓</span> <span>Writing €5M–€100M GWP</span>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 border border-blue-500/30 rounded-xl p-6 text-center">
+              <div className="text-4xl text-white font-bold mb-2">4,000</div>
+              <div className="text-sm text-blue-400 font-medium">Total Addressable Logos in this Segment</div>
+            </div>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -50,6 +76,32 @@ export function Opportunity() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Macro Tailwinds */}
+        <div className="mt-8 bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8">
+          <h3 className="text-2xl mb-6 text-white text-center">Macro Tailwinds</h3>
+          <div className="grid md:grid-cols-2 gap-y-4 gap-x-8 text-slate-300 mb-6">
+            <div className="flex items-start gap-3">
+              <span className="text-blue-400 mt-1">✓</span>
+              <span>MGA market growing faster than traditional carriers</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-blue-400 mt-1">✓</span>
+              <span>Lloyd’s modernization mandates</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-blue-400 mt-1">✓</span>
+              <span>Increasing regulatory scrutiny on reporting</span>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-blue-400 mt-1">✓</span>
+              <span>AI-driven underwriting adoption</span>
+            </div>
+          </div>
+          <p className="text-center text-lg text-purple-400 font-medium">
+            Regulation and complexity are increasing. Spreadsheets cannot scale.
+          </p>
         </div>
       </div>
     </section >

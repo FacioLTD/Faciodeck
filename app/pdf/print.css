@@ -1,0 +1,311 @@
+/* ═══════════════════════════════════════════════════════════════
+   PDF / Print Stylesheet — Facio Investor Deck
+   Each .pdf-slide becomes exactly one landscape page.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ---------- Screen: show a vertical preview ---------- */
+@media screen {
+  body {
+    background: #111 !important;
+  }
+  .pdf-deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 32px 0;
+  }
+  .pdf-slide {
+    width: 1120px;
+    min-height: 630px;
+    max-height: 630px;
+    border-radius: 12px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.6);
+    overflow: hidden;
+  }
+  .pdf-toolbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 14px 24px;
+    background: rgba(10,10,20,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .pdf-toolbar button {
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: all .2s;
+  }
+  .pdf-toolbar .btn-print {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: #fff;
+  }
+  .pdf-toolbar .btn-print:hover {
+    filter: brightness(1.15);
+    transform: translateY(-1px);
+  }
+  .pdf-toolbar .btn-back {
+    background: rgba(255,255,255,.08);
+    color: #94a3b8;
+    border: 1px solid rgba(255,255,255,.1);
+  }
+  .pdf-toolbar .btn-back:hover {
+    background: rgba(255,255,255,.14);
+    color: #fff;
+  }
+  .pdf-toolbar .toolbar-title {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-right: auto;
+    padding-left: 8px;
+  }
+}
+
+/* ---------- Print: exact page sizing ---------- */
+@media print {
+  @page {
+    size: 297mm 210mm;   /* A4 landscape */
+    margin: 0;
+  }
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+  .pdf-toolbar { display: none !important; }
+  .pdf-deck { gap: 0; padding: 0; }
+  .pdf-slide {
+    width: 297mm;
+    height: 210mm;
+    max-height: 210mm;
+    min-height: 210mm;
+    border-radius: 0;
+    box-shadow: none;
+    page-break-after: always;
+    break-after: page;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    overflow: hidden;
+  }
+  .pdf-slide:last-child {
+    page-break-after: auto;
+  }
+}
+
+/* ---------- Shared slide styling ---------- */
+.pdf-slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 64px;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+}
+
+.pdf-slide * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Slide background presets */
+.slide-bg-dark {
+  background: linear-gradient(135deg, #0a0a1a 0%, #0f172a 50%, #0a0a1a 100%);
+}
+.slide-bg-accent {
+  background: linear-gradient(135deg, #0a0a1a 0%, #0f1a2e 40%, #0d1630 100%);
+}
+.slide-bg-hero {
+  background: linear-gradient(135deg, #050515 0%, #0a1628 40%, #0d0d2a 100%);
+}
+.slide-bg-finale {
+  background: radial-gradient(ellipse at center, #0f1a3a 0%, #0a0a1a 70%);
+}
+
+/* Badge pill */
+.pdf-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Grid helpers */
+.pdf-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.pdf-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.pdf-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+
+/* Card */
+.pdf-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* Section title */
+.pdf-section-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.pdf-section-sub {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Small text */
+.pdf-sm { font-size: 12px; }
+.pdf-xs { font-size: 10px; }
+.pdf-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+/* Metric box */
+.pdf-metric {
+  text-align: center;
+  padding: 16px;
+}
+.pdf-metric-value {
+  font-size: 36px;
+  font-weight: 700;
+}
+.pdf-metric-label {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+.pdf-metric-sub {
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+/* Colors */
+.c-blue { color: #60a5fa; }
+.c-green { color: #34d399; }
+.c-purple { color: #a78bfa; }
+.c-red { color: #f87171; }
+.c-orange { color: #fb923c; }
+.c-cyan { color: #22d3ee; }
+.c-yellow { color: #fbbf24; }
+.c-slate { color: #94a3b8; }
+.c-white { color: #fff; }
+
+.bg-blue { background: rgba(59,130,246,.12); border-color: rgba(59,130,246,.25); }
+.bg-green { background: rgba(16,185,129,.12); border-color: rgba(16,185,129,.25); }
+.bg-purple { background: rgba(139,92,246,.12); border-color: rgba(139,92,246,.25); }
+.bg-red { background: rgba(248,113,113,.08); border-color: rgba(248,113,113,.2); }
+.bg-orange { background: rgba(249,115,22,.08); border-color: rgba(249,115,22,.2); }
+.bg-cyan { background: rgba(34,211,238,.08); border-color: rgba(34,211,238,.2); }
+.bg-yellow { background: rgba(251,191,36,.08); border-color: rgba(251,191,36,.2); }
+
+/* Table */
+.pdf-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+.pdf-table th {
+  text-align: left;
+  padding: 8px 12px;
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.pdf-table td {
+  padding: 7px 12px;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  color: #e2e8f0;
+}
+
+/* Divider */
+.pdf-divider {
+  width: 60px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  margin: 12px 0;
+}
+
+/* Footer watermark */
+.pdf-footer {
+  position: absolute;
+  bottom: 16px;
+  right: 32px;
+  font-size: 9px;
+  color: rgba(255,255,255,.15);
+  letter-spacing: 0.05em;
+}
+.pdf-page-num {
+  position: absolute;
+  bottom: 16px;
+  left: 32px;
+  font-size: 9px;
+  color: rgba(255,255,255,.2);
+}
+
+/* Progress bar */
+.pdf-progress {
+  height: 6px;
+  background: rgba(255,255,255,.06);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+.pdf-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+}
+
+/* Check list */
+.pdf-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+.pdf-check::before {
+  content: "✓";
+  color: #34d399;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Slide number dot strip at bottom center */
+.pdf-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+.pdf-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+}
+.pdf-dot.active {
+  background: rgba(96,165,250,.6);
+  width: 14px;
+  border-radius: 3px;
+}

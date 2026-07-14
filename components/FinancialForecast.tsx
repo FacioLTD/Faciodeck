@@ -3,7 +3,7 @@ import { TrendingUp, Users, DollarSign } from "lucide-react";
 
 export function FinancialForecast() {
   const growthData = [
-    { label: "Current", arr: 1000, customers: 8, color: "#3b82f6" },
+    { label: "Current", arr: 1000, customers: 12, color: "#3b82f6" },
     { label: "Month 12", arr: 1500, customers: 25, color: "#a855f7" },
     { label: "Month 18", arr: 2400, customers: 40, color: "#10b981" }
   ];
@@ -17,6 +17,37 @@ export function FinancialForecast() {
           <p className="text-lg text-slate-400">
             Transitioning from Founder-led sales to a Scalable Revenue Machine
           </p>
+        </div>
+
+        {/* Financial Snapshot */}
+        <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 mb-8">
+          <h3 className="text-2xl mb-6 text-white text-center">Financial Snapshot</h3>
+          <div className="grid md:grid-cols-3 gap-6 text-center">
+            <div>
+              <div className="text-sm text-slate-400 mb-1">MRR</div>
+              <div className="text-xl text-white font-semibold">~$83k <span className="text-sm text-slate-400 font-normal">(contracted)</span></div>
+            </div>
+            <div>
+              <div className="text-sm text-slate-400 mb-1">ARR</div>
+              <div className="text-xl text-white font-semibold">$1M</div>
+            </div>
+            <div>
+              <div className="text-sm text-slate-400 mb-1">Revenue</div>
+              <div className="text-xl text-white font-semibold">100% recurring subscription</div>
+            </div>
+            <div>
+              <div className="text-sm text-slate-400 mb-1">Gross Margin</div>
+              <div className="text-xl text-white font-semibold">88%</div>
+            </div>
+            <div>
+              <div className="text-sm text-slate-400 mb-1">Monthly Burn</div>
+              <div className="text-xl text-white font-semibold">$25k</div>
+            </div>
+            <div>
+              <div className="text-sm text-slate-400 mb-1">Runway</div>
+              <div className="text-xl text-white font-semibold">18 months</div>
+            </div>
+          </div>
         </div>
 
         {/* Growth chart */}
@@ -69,7 +100,7 @@ export function FinancialForecast() {
             <tbody>
               <tr className="border-t border-slate-700">
                 <td className="px-6 py-4 text-slate-300">Customers</td>
-                <td className="px-6 py-4 text-center text-white">8 (4 Live / 4 Signed)</td>
+                <td className="px-6 py-4 text-center text-white">12 (6 Live / 6 Signed)</td>
                 <td className="px-6 py-4 text-center text-white">25 Active</td>
                 <td className="px-6 py-4 text-center text-white font-semibold">40+ Active</td>
               </tr>
@@ -93,9 +124,9 @@ export function FinancialForecast() {
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 border border-blue-500/50 rounded-xl p-6 text-center">
             <Users className="text-blue-400 mx-auto mb-3" size={32} />
-            <div className="text-3xl text-white mb-2">5x</div>
+            <div className="text-3xl text-white mb-2">3.3x</div>
             <div className="text-sm text-slate-400">Customer Growth</div>
-            <div className="text-xs text-blue-400 mt-1">8 → 40+ customers</div>
+            <div className="text-xs text-blue-400 mt-1">12 → 40+ customers</div>
           </div>
 
           <div className="bg-gradient-to-br from-purple-900/40 to-purple-800/40 border border-purple-500/50 rounded-xl p-6 text-center">

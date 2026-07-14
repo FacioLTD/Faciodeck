@@ -27,8 +27,8 @@ export function Hero() {
           <div className="px-4 py-2 bg-green-500/20 border border-green-500/50 rounded-full text-green-400">
             Bootstrapped
           </div>
-          <div className="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 mb-6 backdrop-blur-sm">
-            Investor Presentation v2.1
+          <div className="px-4 py-2 bg-blue-500/20 border border-blue-500/50 rounded-full text-blue-400">
+            Revenue Generating
           </div>
           <div className="px-4 py-2 bg-purple-500/20 border border-purple-500/50 rounded-full text-purple-400 font-semibold">
             $1M Contracted ARR

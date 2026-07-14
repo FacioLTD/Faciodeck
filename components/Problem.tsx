@@ -23,7 +23,7 @@ export function Problem() {
               </div>
             </div>
             <p className="text-slate-300 mb-3">
-              Competitors repurpose heavy Carrier systems that demand <span className="text-red-400 font-semibold">$600k+ for implementation</span> and <span className="text-red-400 font-semibold">$600k+ in annual licensing</span>, pricing out mid-market MGAs.
+              Competitors repurpose heavy Carrier systems that demand <span className="text-red-400 font-semibold">$600k+ implementation</span> and <span className="text-red-400 font-semibold">$600k+ annual licensing</span>.
             </p>
           </div>
 
@@ -37,10 +37,10 @@ export function Problem() {
               </div>
             </div>
             <p className="text-slate-300 mb-3">
-              No existing tool <span className="text-orange-400 font-semibold">automatically handles</span> the complex split of premiums, commissions, and taxes for Lloyd's standards
+              No existing tool <span className="text-orange-400 font-semibold">automatically handles</span> complex premium splits, commissions, and Lloyd's-standard bordereaux reconciliation.
             </p>
             <div className="text-sm text-slate-400">
-              Hours of manual work each month
+              Hours of manual work each month. Audit stress. Revenue leakage.
             </div>
           </div>
         </div>

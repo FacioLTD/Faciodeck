@@ -9,7 +9,7 @@ export function Solution() {
           <h2 className="text-4xl md:text-5xl mb-4 text-white">The Solution</h2>
           <p className="text-2xl text-green-400 mb-4">The Revenue Engine</p>
           <p className="text-lg text-slate-300 max-w-3xl mx-auto">
-            A complete "Business Logic as Code" platform
+            A complete "Business Logic as Code" platform purpose-built for MGAs.
           </p>
         </div>
 
@@ -20,7 +20,7 @@ export function Solution() {
             </div>
             <h3 className="text-xl mb-3 text-white">Automated</h3>
             <p className="text-slate-400">
-              From Quote → Bind → Audit-ready bordereaux, <span className="text-green-400 font-semibold">with humans only handling exceptions.</span>
+              Quote → Bind → Bordereaux → Reconciliation → Audit-ready. <span className="text-green-400 font-semibold">Humans handle only exceptions.</span>
             </p>
           </div>
 
@@ -30,7 +30,7 @@ export function Solution() {
             </div>
             <h3 className="text-xl mb-3 text-white">Accessible</h3>
             <p className="text-slate-400">
-              Transparent 3-part pricing. <span className="text-blue-400 font-semibold">Most customers land in the ~$4k–$7k/month</span> range depending on scale.
+              Transparent 3-part pricing. <span className="text-blue-400 font-semibold">Most customers land in the ~$4k–$7k/month range.</span>
             </p>
           </div>
 
@@ -76,7 +76,7 @@ export function Solution() {
             <div>
               <h3 className="text-2xl font-bold text-white mb-2">Commercial Model</h3>
               <p className="text-slate-400 text-sm max-w-xl">
-                We waive the industry-standard $50k+ setup fee in exchange for a high-value monthly retainer. <span className="text-white font-semibold">Zero CapEx for the client. Higher ARR for us.</span>
+                We waive the industry-standard $50k+ setup fee in exchange for a structured monthly success retainer. <span className="text-white font-semibold">Zero CapEx for the client. Higher lifetime value for us.</span>
               </p>
             </div>
           </div>
@@ -99,7 +99,7 @@ export function Solution() {
               <div className="text-2xl font-bold text-white mb-2 mt-1">Usage Based</div>
               <div className="text-xs text-slate-400 mb-4 opacity-0">spacer</div> {/* invisible spacer for alignment */}
               <div className="w-full border-t border-slate-700/50 pt-3 mt-auto">
-                <span className="text-purple-400 text-sm font-medium">Pass-through Compute</span>
+                <span className="text-purple-400 text-sm font-medium">Usage-based pass-through</span>
               </div>
             </div>
 

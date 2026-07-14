@@ -60,10 +60,13 @@ export function TechValidation() {
                             <div>
                                 <h4 className="text-white font-semibold mb-1">Why we pivoted:</h4>
                                 <p className="text-slate-300 italic mb-2">
-                                    "We proved the tech works at the enterprise level, then pointed it at the MGA market for rapid sales velocity."
+                                    "We proved the infrastructure at enterprise scale — then aimed it at the high-velocity MGA segment."
                                 </p>
                                 <p className="text-sm text-blue-400 font-semibold">
-                                    API-first: runs standalone or integrates with accounting, CRM, payments, and insurer systems via REST + webhooks.
+                                    API-first. REST + Webhooks.<br />
+                                    100% internally developed.<br />
+                                    Proprietary rating and reconciliation engine.<br />
+                                    No white-labeled carrier systems.
                                 </p>
                             </div>
                         </div>

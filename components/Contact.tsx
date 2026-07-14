@@ -16,7 +16,7 @@ export function Contact() {
 
         {/* Tagline */}
         <p className="text-2xl md:text-3xl mb-12 text-slate-300 italic">
-          "Building the infrastructure for the future of finance."
+          "Building the operating system for Specialty Insurance."
         </p>
 
         {/* Contact info */}
@@ -63,9 +63,15 @@ export function Contact() {
 
         {/* Footer */}
         <div className="pt-8 border-t border-slate-800">
-          <p className="text-sm text-slate-500">
-            $500k Seed Round | $10M Cap (SAFE) | $1M → $2.4M ARR in 18 Months
-          </p>
+          <div className="text-sm text-slate-400 flex flex-wrap justify-center gap-x-4 gap-y-2">
+            <span>$1M ARR → $2.4M ARR in 18 Months</span>
+            <span className="hidden sm:inline">•</span>
+            <span>Zero CapEx Model</span>
+            <span className="hidden sm:inline">•</span>
+            <span>Recurring Revenue</span>
+            <span className="hidden sm:inline">•</span>
+            <span>Production-Ready Infrastructure</span>
+          </div>
         </div>
       </div>
     </section>

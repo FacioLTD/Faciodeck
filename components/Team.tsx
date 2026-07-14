@@ -1,4 +1,4 @@
-import { User, Shield, Briefcase, Zap, Linkedin } from "lucide-react";
+import { User, Shield, Briefcase, Zap, Linkedin, TrendingUp } from "lucide-react";
 
 const teamMembers = [
     {
@@ -21,10 +21,10 @@ const teamMembers = [
         image: "/images/team/liav.jpg",
         linkedin: "https://www.linkedin.com/in/geffen/",
         details: [
-            { highlight: "Market Dominance", desc: "Founder of Geffen Basad, the largest insurance agency for the Ultra-Orthodox niche." },
-            { highlight: "Enterprise Scale", desc: "Former Chief of Marketing & Data at Harel Insurance and ZIM Shipping." },
+            { highlight: "Market Dominance", desc: "Founder of largest Ultra-Orthodox agency." },
+            { highlight: "Enterprise Scale", desc: "Former CMO/Data at Harel." },
             { highlight: "The Network", desc: "Deep ties into the Israeli and Lloyd's insurance ecosystems." },
-            { highlight: "Superpower", desc: "Opening doors and securing high-level partnerships." }
+            { highlight: "Superpower", desc: "Ecosystem access + distribution leverage." }
         ]
     },
     {
@@ -35,9 +35,9 @@ const teamMembers = [
         linkedin: "https://www.linkedin.com/in/roey-geffen-16b8411/",
         details: [
             { highlight: "Execution", desc: "CEO of Geffen Basad & Board Member at Choco Insurance." },
-            { highlight: "Systems Expert", desc: "Former CIO at PL Group and Logistics Director at Matrix (Israel’s leading IT integrator)." },
-            { highlight: "Experience", desc: "Specialist in ERP implementation and complex business systems." },
-            { highlight: "Superpower", desc: "Turning chaotic operations into structured workflows." }
+            { highlight: "Systems Expert", desc: "ERP + Systems Execution Expert." },
+            { highlight: "Experience", desc: "Specialist in complex business systems." },
+            { highlight: "Superpower", desc: "Turning chaos into structured workflows." }
         ]
     },
     {
@@ -47,10 +47,10 @@ const teamMembers = [
         image: "/images/team/yoni.jpg",
         linkedin: "https://www.linkedin.com/in/yoninovickdba/",
         details: [
-            { highlight: "Global Ops", desc: "Decades in Fintech/Insurtech building Professional Services & Customer Success teams." },
-            { highlight: "Builder", desc: "Built training divisions from scratch for a $3B Bank and scaled systems for 20k+ users." },
+            { highlight: "Global Ops", desc: "Scaled fintech ops for 20k+ users." },
+            { highlight: "Builder", desc: "Built training divisions from scratch for a $3B Bank." },
             { highlight: "Elite Background", desc: "Electronics Engineer + MBA (Highest Honors). PhD Augmented Reality. Combat Engineering Officer & EMT." },
-            { highlight: "Superpower", desc: "Building the \"Machine\" that allows us to onboard 40+ customers." }
+            { highlight: "Superpower", desc: "Building repeatable onboarding machine." }
         ]
     }
 ];
@@ -106,6 +106,29 @@ export function Team() {
                             </div>
                         </div>
                     ))}
+                </div>
+
+                <div className="mt-16 bg-gradient-to-br from-blue-900/40 to-purple-900/40 border border-slate-700 rounded-xl p-8 max-w-4xl mx-auto text-center">
+                    <h3 className="text-2xl font-bold text-white mb-6">Why We Win as a Team</h3>
+                    <p className="text-xl text-blue-400 italic mb-6">"We are not learning insurance. We are automating it."</p>
+                    <div className="grid md:grid-cols-2 gap-4 text-left">
+                        <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-lg">
+                            <Shield className="text-blue-400 shrink-0" size={20} />
+                            <span className="text-slate-200">Insurance distribution expertise</span>
+                        </div>
+                        <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-lg">
+                            <Zap className="text-purple-400 shrink-0" size={20} />
+                            <span className="text-slate-200">Enterprise-grade technical execution</span>
+                        </div>
+                        <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-lg">
+                            <Briefcase className="text-blue-400 shrink-0" size={20} />
+                            <span className="text-slate-200">Proven ability to ship complex integrations</span>
+                        </div>
+                        <div className="flex items-center gap-3 bg-slate-800/50 p-4 rounded-lg">
+                            <TrendingUp className="text-purple-400 shrink-0" size={20} />
+                            <span className="text-slate-200">Founder-led traction already proven</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
