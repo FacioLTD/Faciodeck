@@ -1,0 +1,5 @@
+# Pages on this host are excluded from search with the X-Robots-Tag header and
+# meta robots. Crawling stays allowed so search engines can see that noindex
+# and drop pages that are already indexed.
+User-agent: *
+Allow: /
