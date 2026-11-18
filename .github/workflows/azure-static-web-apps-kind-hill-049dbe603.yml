@@ -37,6 +37,18 @@ jobs:
         env:
           CI: true
 
+      # The published PDF is a deployment artifact, deliberately not committed
+      # to this public repository. Preserve it during a code-only deployment.
+      - name: Preserve published PDF
+        run: |
+          if [ ! -s out/Facio-Investor-Deck.pdf ]; then
+            curl --fail --silent --show-error --location --retry 3 \
+              --max-time 60 --proto '=https' --proto-redir '=https' \
+              https://deck.facio.io/Facio-Investor-Deck.pdf \
+              --output out/Facio-Investor-Deck.pdf
+          fi
+          test "$(head -c 5 out/Facio-Investor-Deck.pdf)" = '%PDF-'
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
