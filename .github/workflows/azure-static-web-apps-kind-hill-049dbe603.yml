@@ -46,9 +46,9 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/" # Keep at root so it finds package.json/config
+          app_location: "out" # Deploy the prebuilt static export
           api_location: "" # Api source code path - optional
-          output_location: "out" # Point to the folder usually created by next export
+          output_location: "" # app_location already points at the artifact
           skip_app_build: true # We just built it manually above
           ###### End of Repository/Build Configurations ######
 

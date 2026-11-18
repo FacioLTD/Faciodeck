@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Facio | Building the Infrastructure of Finance",
   description: "Faciodeck - Investor Presentation",
+  robots: { index: false, follow: false },
   icons: {
     icon: "/favicon.svg",
   },
